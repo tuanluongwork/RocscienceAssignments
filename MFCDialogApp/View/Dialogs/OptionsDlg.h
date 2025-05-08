@@ -8,31 +8,33 @@
  */
 class COptionsDlg : public CDialog
 {
-    DECLARE_DYNAMIC(COptionsDlg)
+	DECLARE_DYNAMIC(COptionsDlg)
 
 public:
-    // Constructor that accepts a model reference
-    COptionsDlg(DialogModel& model, CWnd* pParent = nullptr);
-    virtual ~COptionsDlg();
+	// Constructor that accepts a model reference
+	COptionsDlg(DialogModel& model, CWnd* pParent = nullptr);
+	virtual ~COptionsDlg();
 
-    // Dialog Data
-    enum { IDD = IDD_OPTIONS_DIALOG };
+	// Dialog Data
+	enum { IDD = IDD_OPTIONS_DIALOG };
 
 protected:
-    virtual void DoDataExchange(CDataExchange* pDX) override;
-    virtual BOOL OnInitDialog() override;
+	void DoDataExchange(CDataExchange* pDX) override;
+	BOOL OnInitDialog() override;
+	void OnOK() override;
+	void OnCancel() override;
 
-    DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP()
 
 private:
-    // Reference to the model
-    DialogModel& m_model;
+	// Reference to the model
+	DialogModel& m_model;
 
-    // Dialog controls
-    CStatic m_label;
-    CComboBox m_comboBox;
+	// Dialog controls
+	CStatic m_label;
+	CComboBox m_comboBox;
 
 public:
-    // Message handlers
-    afx_msg void OnCbnSelchangeCombo();
+	// Message handlers
+	afx_msg void OnCbnSelchangeCombo();
 };
