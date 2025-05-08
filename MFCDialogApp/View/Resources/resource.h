@@ -9,6 +9,8 @@
 #define IDD_OPTIONS_DIALOG              103
 #define IDR_MAINFRAME                   128
 
+#define IDCANCEL_KEY                    2
+
 // Control IDs - keeping these separate from resource IDs
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001

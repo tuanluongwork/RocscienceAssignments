@@ -21,8 +21,9 @@ public:
 protected:
 	void DoDataExchange(CDataExchange* pDX) override;
 	BOOL OnInitDialog() override;
-	void OnOK() override;
-	void OnCancel() override;
+
+	// No longer need OnOK and OnCancel overrides
+	// We'll use WM_CLOSE instead
 
 	DECLARE_MESSAGE_MAP()
 
@@ -37,4 +38,5 @@ private:
 public:
 	// Message handlers
 	afx_msg void OnCbnSelchangeCombo();
+	afx_msg void OnClose();
 };

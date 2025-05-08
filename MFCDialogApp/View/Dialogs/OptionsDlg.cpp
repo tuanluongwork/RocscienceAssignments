@@ -13,8 +13,7 @@ IMPLEMENT_DYNAMIC(COptionsDlg, CDialog)
 	COptionsDlg::COptionsDlg(DialogModel& model, CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_OPTIONS_DIALOG, pParent), m_model(model)
 {
-	// Save the current selection in case of cancel
-	m_model.SaveCurrentSelection();
+	// No need to save current selection as we'll update immediately
 }
 
 COptionsDlg::~COptionsDlg()
@@ -33,6 +32,7 @@ void COptionsDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COptionsDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_OPTIONS, &COptionsDlg::OnCbnSelchangeCombo)
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 BOOL COptionsDlg::OnInitDialog()
@@ -68,31 +68,8 @@ BOOL COptionsDlg::OnInitDialog()
 }
 
 /**
- * Override OnOK to save the current selection before closing
- */
-void COptionsDlg::OnOK()
-{
-	// Current selection is already in the model
-	// Just save it to confirm the change
-	m_model.SaveCurrentSelection();
-
-	CDialog::OnOK();
-}
-
-/**
- * Override OnCancel to restore the previous selection
- */
-void COptionsDlg::OnCancel()
-{
-	// Restore the saved selection
-	m_model.RestoreSavedSelection();
-
-	CDialog::OnCancel();
-}
-
-/**
  * Handler for combo box selection change
- * Updates the model with the newly selected option
+ * Updates the model with the newly selected option immediately
  */
 void COptionsDlg::OnCbnSelchangeCombo()
 {
@@ -101,8 +78,18 @@ void COptionsDlg::OnCbnSelchangeCombo()
 
 	// Update model if selection is valid
 	if (selectedIndex != CB_ERR) {
-		// Update model directly - controller is not needed here
-		// since the model was passed by reference
+		// Update model directly - changes take effect immediately
 		m_model.SetSelectedIndex(selectedIndex);
+		m_model.SaveCurrentSelection(); // Save the selection
 	}
+}
+
+/**
+ * Handle the dialog closing
+ * We'll use this instead of OK/Cancel buttons
+ */
+void COptionsDlg::OnClose()
+{
+	// Simply end the dialog with IDOK to trigger updates in MainDlg
+	EndDialog(IDOK);
 }

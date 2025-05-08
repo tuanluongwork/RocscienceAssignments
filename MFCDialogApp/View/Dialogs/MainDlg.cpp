@@ -95,6 +95,9 @@ void CMainDlg::OnBnClickedButton1()
 
 	// Create and show Ground Water dialog with model from controller
 	COptionsDlg dlg(groundWaterModel);
+
+	// The dialog will update the model when selection changes
+	// and return IDOK when closed
 	if (dlg.DoModal() == IDOK) {
 		// Update UI after dialog closes
 		UpdateUI();
@@ -108,6 +111,9 @@ void CMainDlg::OnBnClickedButton2()
 
 	// Create and show Thermal dialog with model from controller
 	COptionsDlg dlg(thermalModel);
+
+	// The dialog will update the model when selection changes
+	// and return IDOK when closed
 	if (dlg.DoModal() == IDOK) {
 		// Update UI after dialog closes
 		UpdateUI();
