@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{5e0fb5f7-e78e-4664-b0b4-824b18878508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{468ac063-8d99-4a3e-8452-14578ae4090e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{0ac0f06c-4f37-47c2-9afd-03b428c3cad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Dialogs">
+      <UniqueIdentifier>{25b7d18c-e33c-4080-849a-fe88d0002a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Resources">
+      <UniqueIdentifier>{6c9bbeb6-a968-4e2b-992b-ca637f6a126d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\DialogModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\AppController.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Dialogs\OptionsDlg.h">
+      <Filter>View\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Dialogs\MainDlg.h">
+      <Filter>View\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Resources\Resource.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MFCDialogApp.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Model\DialogModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\AppController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Dialogs\MainDlg.cpp">
+      <Filter>View\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Dialogs\OptionsDlg.cpp">
+      <Filter>View\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCDialogApp.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Resources\MFCDialogApp.rc2">
+      <Filter>View\Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="View\Resources\MFCDialogApp.ico">
+      <Filter>View\Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="View\Resources\MFCDialogApp.rc">
+      <Filter>View\Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
