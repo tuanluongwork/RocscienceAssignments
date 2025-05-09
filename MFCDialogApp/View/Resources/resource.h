@@ -10,10 +10,10 @@
 #define IDR_MAINFRAME                   128
 
 // Control IDs - keeping these separate from resource IDs
-#define IDC_BUTTON1                     1000
-#define IDC_BUTTON2                     1001
-#define IDC_STATIC_LABEL1               1002
-#define IDC_STATIC_LABEL2               1003
+#define IDC_BUTTON_GROUNDWATER                     1000
+#define IDC_BUTTON_THERMAL                     1001
+#define IDC_STATIC_LABEL_GROUNDWATER               1002
+#define IDC_STATIC_LABEL_THERMAL               1003
 #define IDC_STATIC_LABEL                1004
 #define IDC_COMBO_OPTIONS               1005
 

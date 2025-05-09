@@ -27,15 +27,15 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 
 	// Link member variables to dialog controls
-	DDX_Control(pDX, IDC_BUTTON1, m_button1);
-	DDX_Control(pDX, IDC_BUTTON2, m_button2);
-	DDX_Control(pDX, IDC_STATIC_LABEL1, m_label1);
-	DDX_Control(pDX, IDC_STATIC_LABEL2, m_label2);
+	DDX_Control(pDX, IDC_BUTTON_GROUNDWATER, m_groundwaterButton);
+	DDX_Control(pDX, IDC_BUTTON_THERMAL, m_thermalButton);
+	DDX_Control(pDX, IDC_STATIC_LABEL_GROUNDWATER, m_groundwaterLabel);
+	DDX_Control(pDX, IDC_STATIC_LABEL_THERMAL, m_thermalLabel);
 }
 
 BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON1, &CMainDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON2, &CMainDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON_GROUNDWATER, &CMainDlg::OnShowGroundWaterOptionsDialog)
+	ON_BN_CLICKED(IDC_BUTTON_THERMAL, &CMainDlg::OnShowThermalOptionsDialog)
 END_MESSAGE_MAP()
 
 BOOL CMainDlg::OnInitDialog()
@@ -46,12 +46,12 @@ BOOL CMainDlg::OnInitDialog()
 	m_controller.InitializeModels();
 
 	// Set button text
-	m_button1.SetWindowText(L"Ground Water Method");
-	m_button2.SetWindowText(L"Thermal Method");
+	m_groundwaterButton.SetWindowText(L"Ground Water Method");
+	m_thermalButton.SetWindowText(L"Thermal Method");
 
 	// Initialize labels with styled appearance
-	m_label1.SetWindowText(L"No selection");
-	m_label2.SetWindowText(L"No selection");
+	m_groundwaterLabel.SetWindowText(L"No selection");
+	m_thermalLabel.SetWindowText(L"No selection");
 
 	// Set custom font for better visibility
 	LOGFONT lf;
@@ -61,8 +61,8 @@ BOOL CMainDlg::OnInitDialog()
 	lf.lfWeight = FW_NORMAL;
 	CFont* pFont = new CFont();
 	pFont->CreateFontIndirect(&lf);
-	m_label1.SetFont(pFont);
-	m_label2.SetFont(pFont);
+	m_groundwaterLabel.SetFont(pFont);
+	m_thermalLabel.SetFont(pFont);
 
 	// Update UI based on models from controller
 	UpdateUI();
@@ -81,34 +81,34 @@ void CMainDlg::UpdateUI()
 	std::wstring thermalOption = thermalModel.GetSelectedOption();
 
 	if (!groundWaterOption.empty()) {
-		m_label1.SetWindowText(groundWaterOption.c_str());
+		m_groundwaterLabel.SetWindowText(groundWaterOption.c_str());
 	}
 
 	if (!thermalOption.empty()) {
-		m_label2.SetWindowText(thermalOption.c_str());
+		m_thermalLabel.SetWindowText(thermalOption.c_str());
 	}
 }
 
-void CMainDlg::OnBnClickedButton1()
+void CMainDlg::OnShowGroundWaterOptionsDialog()
 {
 	// Let the controller handle showing the dialog
 	if (m_controller.ShowGroundWaterOptionsDialog(this)) {
 		// Update UI after dialog is closed
 		std::wstring groundWaterOption = m_controller.GetGroundWaterModel().GetSelectedOption();
 		if (!groundWaterOption.empty()) {
-			m_label1.SetWindowText(groundWaterOption.c_str());
+			m_groundwaterLabel.SetWindowText(groundWaterOption.c_str());
 		}
 	}
 }
 
-void CMainDlg::OnBnClickedButton2()
+void CMainDlg::OnShowThermalOptionsDialog()
 {
 	// Let the controller handle showing the dialog
 	if (m_controller.ShowThermalOptionsDialog(this)) {
 		// Update UI after dialog is closed
 		std::wstring thermalOption = m_controller.GetThermalModel().GetSelectedOption();
 		if (!thermalOption.empty()) {
-			m_label2.SetWindowText(thermalOption.c_str());
+			m_thermalLabel.SetWindowText(thermalOption.c_str());
 		}
 	}
 }
