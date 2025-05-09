@@ -91,40 +91,18 @@ void CMainDlg::UpdateUI()
 
 void CMainDlg::OnBnClickedButton1()
 {
-	// Get reference to groundwater model from controller
-	DialogModelBase& groundwaterModel = m_controller.GetGroundWaterModel();
-
-	// Create and show the dialog with the specific model
-	COptionsDlg dlg(groundwaterModel);
-
-	// Handle the dialog result
-	auto res = dlg.DoModal();
-	if (res == IDOK || res == IDCANCEL) {
-		// Update label contents from models
-		std::wstring groundWaterOption = groundwaterModel.GetSelectedOption();
-
-		if (!groundWaterOption.empty()) {
-			m_label1.SetWindowText(groundWaterOption.c_str());
-		}
+	// Let the controller handle showing the dialog
+	if (m_controller.ShowGroundWaterOptionsDialog(this)) {
+		// Update UI after dialog is closed
+		UpdateUI();
 	}
 }
 
 void CMainDlg::OnBnClickedButton2()
 {
-	// Get reference to thermal model from controller
-	DialogModelBase& thermalModel = m_controller.GetThermalModel();
-
-	// Create and show the dialog with the specific model
-	COptionsDlg dlg(thermalModel);
-
-	// Handle the dialog result
-	auto res = dlg.DoModal();
-	if (res == IDOK || res == IDCANCEL) {
-		// Create and show the dialog with the specific model
-		std::wstring thermalOption = thermalModel.GetSelectedOption();
-
-		if (!thermalOption.empty()) {
-			m_label2.SetWindowText(thermalOption.c_str());
-		}
+	// Let the controller handle showing the dialog
+	if (m_controller.ShowThermalOptionsDialog(this)) {
+		// Update UI after dialog is closed
+		UpdateUI();
 	}
 }

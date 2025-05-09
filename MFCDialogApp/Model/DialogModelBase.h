@@ -2,35 +2,44 @@
 #include <string>
 #include <vector>
 
-// Base class for dialog models
-class DialogModelBase {
-protected:
-    std::wstring m_dialogTitle;
-    std::wstring m_labelText;
-    std::vector<std::wstring> m_comboOptions;
-    int m_selectedIndex = 0;
-    int m_savedIndex = 0;  // Added for saving selection state
-
+class DialogModelBase
+{
 public:
-    // Common getters
-    virtual std::wstring GetDialogTitle() const { return m_dialogTitle; }
-    virtual std::wstring GetLabelText() const { return m_labelText; }
-    virtual const std::vector<std::wstring>& GetComboOptions() const { return m_comboOptions; }
-    virtual int GetSelectedIndex() const { return m_selectedIndex; }
+	// Constructor and destructor
+	DialogModelBase() : m_selectedIndex(0) {}
+	virtual ~DialogModelBase() {}
 
-    // Get the text of the selected option
-    virtual std::wstring GetSelectedOption() const {
-        if (m_selectedIndex >= 0 && m_selectedIndex < m_comboOptions.size()) {
-            return m_comboOptions[m_selectedIndex];
-        }
-        return L"";
-    }
+	// Title methods
+	void SetTitle(const std::wstring& title) { m_title = title; }
+	std::wstring GetTitle() const { return m_title; }
 
-    // Common setters
-    virtual void SetSelectedIndex(int index) { m_selectedIndex = index; }
+	// Label text methods
+	void SetLabelText(const std::wstring& labelText) { m_labelText = labelText; }
+	std::wstring GetLabelText() const { return m_labelText; }
 
-    // Save the current selection (can be overridden by derived classes)
-    virtual void SaveCurrentSelection() { m_savedIndex = m_selectedIndex; }
+	// Options methods
+	void SetOptions(const std::vector<std::wstring>& options) { m_options = options; }
+	std::vector<std::wstring> GetOptions() const { return m_options; }
 
-    virtual ~DialogModelBase() = default;
+	// Index selection methods
+	void SetSelectedIndex(int index) {
+		if (index >= 0 && index < static_cast<int>(m_options.size())) {
+			m_selectedIndex = index;
+		}
+	}
+	int GetSelectedIndex() const { return m_selectedIndex; }
+
+	// Get the currently selected option text
+	std::wstring GetSelectedOption() const {
+		if (m_selectedIndex >= 0 && m_selectedIndex < static_cast<int>(m_options.size())) {
+			return m_options[m_selectedIndex];
+		}
+		return L"";
+	}
+
+private:
+	std::wstring m_title;
+	std::wstring m_labelText;
+	std::vector<std::wstring> m_options;
+	int m_selectedIndex;
 };

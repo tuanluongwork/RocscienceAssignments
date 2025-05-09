@@ -1,38 +1,46 @@
 #pragma once
+#include <vector>
+#include <string>
+#include "../Resources/resource.h"
 
-#include "../../Model/DialogModelBase.h"
-
-// COptionsDlg dialog
 class COptionsDlg : public CDialog
 {
 	DECLARE_DYNAMIC(COptionsDlg)
 
 public:
-	COptionsDlg(DialogModelBase& model, CWnd* pParent = nullptr);
+	// Constructor with no model dependency
+	COptionsDlg(CWnd* pParent = nullptr);
 	virtual ~COptionsDlg();
 
 	// Dialog Data
-#ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_OPTIONS_DIALOG };
-#endif
+
+	// Methods for controller to set dialog properties
+	void SetDialogTitle(const CString& title);
+	void SetLabelText(const CString& text);
+	void SetComboOptions(const std::vector<std::wstring>& options);
+	void SetSelectedIndex(int index);
+	int GetSelectedIndex() const;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
-	DECLARE_MESSAGE_MAP()
-
-	// Message handlers
 	virtual BOOL OnInitDialog();
-	afx_msg void OnCbnSelchangeCombo();
-	afx_msg void OnClose();
-	virtual void OnOK();
-	virtual void OnCancel();
 
-private:
-	// Controls
+	// Member variables for dialog controls
 	CStatic m_label;
 	CComboBox m_comboBox;
 
-	// Data
-	DialogModelBase& m_model;
+	// Member variables to store data
+	CString m_dialogTitle;
+	CString m_labelText;
+	std::vector<std::wstring> m_comboOptions;
+	int m_selectedIndex;
 	int m_initialSelection;
+
+	// Message map and event handlers
+	DECLARE_MESSAGE_MAP()
+	afx_msg void OnCbnSelchangeCombo();
+	afx_msg void OnOK();
+	afx_msg void OnCancel();
+	afx_msg void OnClose();
 };
