@@ -11,8 +11,8 @@ public:
     void InitializeModels();
 
     // Getters for models
-    GroundwaterDialogModel& GetGroundWaterModel() { return m_groundWaterModel; }
-    ThermalDialogModel& GetThermalModel() { return m_thermalModel; }
+    DialogModelBase& GetGroundWaterModel() { return m_groundWaterModel; }
+    DialogModelBase& GetThermalModel() { return m_thermalModel; }
 
 private:
     // Model instances

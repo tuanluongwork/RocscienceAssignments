@@ -4,8 +4,6 @@
 #include "OptionsDlg.h"
 #include "afxdialogex.h"
 #include "../Resources/Resource.h"
-#include "../../Model/GroundwaterDialogModel.h"
-#include "../../Model/ThermalDialogModel.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,8 +73,8 @@ BOOL CMainDlg::OnInitDialog()
 void CMainDlg::UpdateUI()
 {
 	// Get models from controller
-	GroundwaterDialogModel& groundWaterModel = m_controller.GetGroundWaterModel();
-	ThermalDialogModel& thermalModel = m_controller.GetThermalModel();
+	DialogModelBase& groundWaterModel = m_controller.GetGroundWaterModel();
+	DialogModelBase& thermalModel = m_controller.GetThermalModel();
 
 	// Update label contents from models
 	std::wstring groundWaterOption = groundWaterModel.GetSelectedOption();
@@ -94,7 +92,7 @@ void CMainDlg::UpdateUI()
 void CMainDlg::OnBnClickedButton1()
 {
 	// Get reference to groundwater model from controller
-	GroundwaterDialogModel& groundwaterModel = m_controller.GetGroundWaterModel();
+	DialogModelBase& groundwaterModel = m_controller.GetGroundWaterModel();
 
 	// Create and show the dialog with the specific model
 	COptionsDlg dlg(groundwaterModel);
@@ -114,7 +112,7 @@ void CMainDlg::OnBnClickedButton1()
 void CMainDlg::OnBnClickedButton2()
 {
 	// Get reference to thermal model from controller
-	ThermalDialogModel& thermalModel = m_controller.GetThermalModel();
+	DialogModelBase& thermalModel = m_controller.GetThermalModel();
 
 	// Create and show the dialog with the specific model
 	COptionsDlg dlg(thermalModel);
