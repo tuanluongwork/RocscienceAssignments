@@ -34,8 +34,8 @@ void COptionsDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COptionsDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_OPTIONS, &COptionsDlg::OnCbnSelchangeCombo)
-	ON_BN_CLICKED(IDOK_KEY, &COptionsDlg::OnOK)
-	ON_BN_CLICKED(IDCANCEL_KEY, &COptionsDlg::OnCancel)
+	ON_BN_CLICKED(IDOK, &COptionsDlg::OnOK)
+	ON_BN_CLICKED(IDCANCEL, &COptionsDlg::OnCancel)
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
