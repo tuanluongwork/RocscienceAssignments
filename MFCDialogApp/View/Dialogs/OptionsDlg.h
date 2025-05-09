@@ -1,42 +1,38 @@
 #pragma once
-#include "../../Model/DialogModel.h"
-#include "../Resources/resource.h"
 
-/**
- * @class COptionsDlg
- * @brief View component of MVC pattern - reusable dialog for options
- */
+#include "../../Model/DialogModelBase.h"
+
+// COptionsDlg dialog
 class COptionsDlg : public CDialog
 {
 	DECLARE_DYNAMIC(COptionsDlg)
 
 public:
-	// Constructor that accepts a model reference
-	COptionsDlg(DialogModel& model, CWnd* pParent = nullptr);
+	COptionsDlg(DialogModelBase& model, CWnd* pParent = nullptr);
 	virtual ~COptionsDlg();
 
 	// Dialog Data
+#ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_OPTIONS_DIALOG };
+#endif
 
 protected:
-	void DoDataExchange(CDataExchange* pDX) override;
-	BOOL OnInitDialog() override;
-
-	// No longer need OnOK and OnCancel overrides
-	// We'll use WM_CLOSE instead
-
+	virtual void DoDataExchange(CDataExchange* pDX);
 	DECLARE_MESSAGE_MAP()
 
-private:
-	// Reference to the model
-	DialogModel& m_model;
+	// Message handlers
+	virtual BOOL OnInitDialog();
+	afx_msg void OnCbnSelchangeCombo();
+	afx_msg void OnClose();
+	virtual void OnOK();
+	virtual void OnCancel();
 
-	// Dialog controls
+private:
+	// Controls
 	CStatic m_label;
 	CComboBox m_comboBox;
 
-public:
-	// Message handlers
-	afx_msg void OnCbnSelchangeCombo();
-	afx_msg void OnClose();
+	// Data
+	DialogModelBase& m_model;
+	int m_initialSelection;
 };

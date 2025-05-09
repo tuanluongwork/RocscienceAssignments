@@ -3,6 +3,9 @@
 #include "MainDlg.h"
 #include "OptionsDlg.h"
 #include "afxdialogex.h"
+#include "../Resources/Resource.h"
+#include "../../Model/GroundwaterDialogModel.h"
+#include "../../Model/ThermalDialogModel.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -72,8 +75,8 @@ BOOL CMainDlg::OnInitDialog()
 void CMainDlg::UpdateUI()
 {
 	// Get models from controller
-	DialogModel& groundWaterModel = m_controller.GetGroundWaterModel();
-	DialogModel& thermalModel = m_controller.GetThermalModel();
+	GroundwaterDialogModel& groundWaterModel = m_controller.GetGroundWaterModel();
+	ThermalDialogModel& thermalModel = m_controller.GetThermalModel();
 
 	// Update label contents from models
 	std::wstring groundWaterOption = groundWaterModel.GetSelectedOption();
@@ -90,32 +93,40 @@ void CMainDlg::UpdateUI()
 
 void CMainDlg::OnBnClickedButton1()
 {
-	// Get model from controller
-	DialogModel& groundWaterModel = m_controller.GetGroundWaterModel();
+	// Get reference to groundwater model from controller
+	GroundwaterDialogModel& groundwaterModel = m_controller.GetGroundWaterModel();
 
-	// Create and show Ground Water dialog with model from controller
-	COptionsDlg dlg(groundWaterModel);
+	// Create and show the dialog with the specific model
+	COptionsDlg dlg(groundwaterModel);
 
-	// The dialog will update the model when selection changes
-	// and return IDOK when closed
-	if (dlg.DoModal() == IDOK) {
-		// Update UI after dialog closes
-		UpdateUI();
+	// Handle the dialog result
+	auto res = dlg.DoModal();
+	if (res == IDOK || res == IDCANCEL) {
+		// Update label contents from models
+		std::wstring groundWaterOption = groundwaterModel.GetSelectedOption();
+
+		if (!groundWaterOption.empty()) {
+			m_label1.SetWindowText(groundWaterOption.c_str());
+		}
 	}
 }
 
 void CMainDlg::OnBnClickedButton2()
 {
-	// Get model from controller
-	DialogModel& thermalModel = m_controller.GetThermalModel();
+	// Get reference to thermal model from controller
+	ThermalDialogModel& thermalModel = m_controller.GetThermalModel();
 
-	// Create and show Thermal dialog with model from controller
+	// Create and show the dialog with the specific model
 	COptionsDlg dlg(thermalModel);
 
-	// The dialog will update the model when selection changes
-	// and return IDOK when closed
-	if (dlg.DoModal() == IDOK) {
-		// Update UI after dialog closes
-		UpdateUI();
+	// Handle the dialog result
+	auto res = dlg.DoModal();
+	if (res == IDOK || res == IDCANCEL) {
+		// Create and show the dialog with the specific model
+		std::wstring thermalOption = thermalModel.GetSelectedOption();
+
+		if (!thermalOption.empty()) {
+			m_label2.SetWindowText(thermalOption.c_str());
+		}
 	}
 }

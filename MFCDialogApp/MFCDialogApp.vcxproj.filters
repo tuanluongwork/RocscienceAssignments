@@ -28,7 +28,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Model\DialogModel.h">
+    <ClInclude Include="Model\DialogModelBase.h">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Controller\AppController.h">
@@ -40,14 +40,20 @@
     <ClInclude Include="View\Dialogs\MainDlg.h">
       <Filter>View\Dialogs</Filter>
     </ClInclude>
-    <ClInclude Include="View\Resources\Resource.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="MFCDialogApp.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Model\ThermalDialogModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\GroundwaterDialogModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Resources\Resource.h">
+      <Filter>View\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Model\DialogModel.cpp">
+    <ClCompile Include="Model\DialogModelBase.cpp">
       <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="Controller\AppController.cpp">

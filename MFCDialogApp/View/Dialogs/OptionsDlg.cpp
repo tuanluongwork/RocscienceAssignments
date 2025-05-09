@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "../../MFCDialogApp.h"
+#include "../Resources/Resource.h"  // Include resource header
 #include "OptionsDlg.h"
 #include "afxdialogex.h"
 
@@ -7,13 +8,14 @@ IMPLEMENT_DYNAMIC(COptionsDlg, CDialog)
 
 /**
  * Constructor for the Options Dialog
- * @param model Reference to the DialogModel provided by the controller
+ * @param model Reference to the DialogModelBase provided by the controller
  * @param pParent Optional parent window
  */
-	COptionsDlg::COptionsDlg(DialogModel& model, CWnd* pParent /*=nullptr*/)
+	COptionsDlg::COptionsDlg(DialogModelBase& model, CWnd* pParent /*=nullptr*/)
 	: CDialog(IDD_OPTIONS_DIALOG, pParent), m_model(model)
 {
-	// No need to save current selection as we'll update immediately
+	// Store initial selection for possible cancel restoration
+	m_initialSelection = m_model.GetSelectedIndex();
 }
 
 COptionsDlg::~COptionsDlg()
@@ -32,6 +34,8 @@ void COptionsDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COptionsDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_OPTIONS, &COptionsDlg::OnCbnSelchangeCombo)
+	ON_BN_CLICKED(IDOK_KEY, &COptionsDlg::OnOK)
+	ON_BN_CLICKED(IDCANCEL_KEY, &COptionsDlg::OnCancel)
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
@@ -69,7 +73,6 @@ BOOL COptionsDlg::OnInitDialog()
 
 /**
  * Handler for combo box selection change
- * Updates the model with the newly selected option immediately
  */
 void COptionsDlg::OnCbnSelchangeCombo()
 {
@@ -78,10 +81,35 @@ void COptionsDlg::OnCbnSelchangeCombo()
 
 	// Update model if selection is valid
 	if (selectedIndex != CB_ERR) {
-		// Update model directly - changes take effect immediately
+		// Update model temporarily - will be committed on OK
 		m_model.SetSelectedIndex(selectedIndex);
-		m_model.SaveCurrentSelection(); // Save the selection
 	}
+}
+
+/**
+ * Handle OK button click
+ * Saves current selection and closes dialog with IDOK
+ */
+void COptionsDlg::OnOK()
+{
+	// Save the selection permanently
+	m_model.SaveCurrentSelection();
+
+	// Close dialog with OK result
+	EndDialog(IDOK);
+}
+
+/**
+ * Handle Cancel button click
+ * Restores initial selection and closes dialog with IDCANCEL
+ */
+void COptionsDlg::OnCancel()
+{
+	// Save the selection permanently
+	m_model.SaveCurrentSelection();
+
+	// Close dialog with Cancel result
+	EndDialog(IDCANCEL);
 }
 
 /**
@@ -90,6 +118,9 @@ void COptionsDlg::OnCbnSelchangeCombo()
  */
 void COptionsDlg::OnClose()
 {
+	// Save the selection permanently
+	m_model.SaveCurrentSelection();
+
 	// Simply end the dialog with IDOK to trigger updates in MainDlg
 	EndDialog(IDOK);
 }

@@ -3,17 +3,16 @@
 
 AppController::AppController()
 {
-    InitializeModels();
+    // Constructor implementation
 }
 
 AppController::~AppController()
 {
-    // Clean up any resources if needed
+    // Destructor implementation
 }
 
 void AppController::InitializeModels()
 {
-    // Configure models for each dialog type
-    m_groundWaterModel.SetDialogType(GROUNDWATER_DIALOG);
-    m_thermalModel.SetDialogType(THERMAL_DIALOG);
+    // Initialize models with default values
+    // No need for SetDialogType anymore as models are specialized
 }

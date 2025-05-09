@@ -183,11 +183,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Model\GroundwaterDialogModel.h" />
     <ClInclude Include="MFCDialogApp.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Controller\AppController.h" />
-    <ClInclude Include="Model\DialogModel.h" />
+    <ClInclude Include="Model\DialogModelBase.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Model\ThermalDialogModel.h" />
     <ClInclude Include="View\Dialogs\MainDlg.h" />
     <ClInclude Include="View\Dialogs\OptionsDlg.h" />
     <ClInclude Include="View\Resources\Resource.h" />
@@ -196,7 +198,7 @@
   <ItemGroup>
     <ClCompile Include="MFCDialogApp.cpp" />
     <ClCompile Include="Controller\AppController.cpp" />
-    <ClCompile Include="Model\DialogModel.cpp" />
+    <ClCompile Include="Model\DialogModelBase.cpp" />
     <ClCompile Include="View\Dialogs\MainDlg.cpp" />
     <ClCompile Include="View\Dialogs\OptionsDlg.cpp" />
     <ClCompile Include="pch.cpp">
