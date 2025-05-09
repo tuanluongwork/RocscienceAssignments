@@ -94,7 +94,10 @@ void CMainDlg::OnBnClickedButton1()
 	// Let the controller handle showing the dialog
 	if (m_controller.ShowGroundWaterOptionsDialog(this)) {
 		// Update UI after dialog is closed
-		UpdateUI();
+		std::wstring groundWaterOption = m_controller.GetGroundWaterModel().GetSelectedOption();
+		if (!groundWaterOption.empty()) {
+			m_label1.SetWindowText(groundWaterOption.c_str());
+		}
 	}
 }
 
@@ -103,6 +106,9 @@ void CMainDlg::OnBnClickedButton2()
 	// Let the controller handle showing the dialog
 	if (m_controller.ShowThermalOptionsDialog(this)) {
 		// Update UI after dialog is closed
-		UpdateUI();
+		std::wstring thermalOption = m_controller.GetThermalModel().GetSelectedOption();
+		if (!thermalOption.empty()) {
+			m_label2.SetWindowText(thermalOption.c_str());
+		}
 	}
 }
