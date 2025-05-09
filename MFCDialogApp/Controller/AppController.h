@@ -1,25 +1,31 @@
 #pragma once
-#include "../Model/DialogModel.h"
+#include "../Model/DialogModelBase.h"
+#include "../View/Dialogs/OptionsDlg.h"
+#include <afxwin.h>
 
-/**
- * @class AppController
- * @brief Controller class that coordinates between models and views
- */
 class AppController
 {
 public:
-    AppController();
-    virtual ~AppController();
+	// Constructor with parameters for models
+	AppController();
+	~AppController();
 
-    // Initialize models
-    void InitializeModels();
+	// Initialize models with default values
+	void InitializeModels();
 
-    // Access methods for models
-    DialogModel& GetGroundWaterModel() { return m_groundWaterModel; }
-    DialogModel& GetThermalModel() { return m_thermalModel; }
+	// Getters for models
+	DialogModelBase& GetGroundWaterModel();
+	DialogModelBase& GetThermalModel();
+
+	// Methods to show dialogs through the controller
+	bool ShowGroundWaterOptionsDialog(CWnd* pParent);
+	bool ShowThermalOptionsDialog(CWnd* pParent);
 
 private:
-    // Data models
-    DialogModel m_groundWaterModel;
-    DialogModel m_thermalModel;
+	// Model instances
+	DialogModelBase m_groundWaterModel;
+	DialogModelBase m_thermalModel;
+
+	// Helper method to configure dialog with model data
+	bool ShowOptionsDialog(DialogModelBase& model, CWnd* pParent);
 };

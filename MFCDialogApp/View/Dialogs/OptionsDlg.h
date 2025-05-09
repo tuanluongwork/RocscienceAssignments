@@ -1,42 +1,46 @@
 #pragma once
-#include "../../Model/DialogModel.h"
+#include <vector>
+#include <string>
 #include "../Resources/resource.h"
 
-/**
- * @class COptionsDlg
- * @brief View component of MVC pattern - reusable dialog for options
- */
 class COptionsDlg : public CDialog
 {
 	DECLARE_DYNAMIC(COptionsDlg)
 
 public:
-	// Constructor that accepts a model reference
-	COptionsDlg(DialogModel& model, CWnd* pParent = nullptr);
+	// Constructor with no model dependency
+	COptionsDlg(CWnd* pParent = nullptr);
 	virtual ~COptionsDlg();
 
 	// Dialog Data
 	enum { IDD = IDD_OPTIONS_DIALOG };
 
+	// Methods for controller to set dialog properties
+	void SetDialogTitle(const CString& title);
+	void SetLabelText(const CString& text);
+	void SetComboOptions(const std::vector<std::wstring>& options);
+	void SetSelectedIndex(int index);
+	int GetSelectedIndex() const;
+
 protected:
-	void DoDataExchange(CDataExchange* pDX) override;
-	BOOL OnInitDialog() override;
+	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual BOOL OnInitDialog();
 
-	// No longer need OnOK and OnCancel overrides
-	// We'll use WM_CLOSE instead
-
-	DECLARE_MESSAGE_MAP()
-
-private:
-	// Reference to the model
-	DialogModel& m_model;
-
-	// Dialog controls
+	// Member variables for dialog controls
 	CStatic m_label;
 	CComboBox m_comboBox;
 
-public:
-	// Message handlers
+	// Member variables to store data
+	CString m_dialogTitle;
+	CString m_labelText;
+	std::vector<std::wstring> m_comboOptions;
+	int m_selectedIndex;
+	int m_initialSelection;
+
+	// Message map and event handlers
+	DECLARE_MESSAGE_MAP()
 	afx_msg void OnCbnSelchangeCombo();
+	afx_msg void OnOK();
+	afx_msg void OnCancel();
 	afx_msg void OnClose();
 };
