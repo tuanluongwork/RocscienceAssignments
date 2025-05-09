@@ -42,12 +42,6 @@
     </ClInclude>
     <ClInclude Include="MFCDialogApp.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Model\ThermalDialogModel.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\GroundwaterDialogModel.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="View\Resources\Resource.h">
       <Filter>View\Resources</Filter>
     </ClInclude>
